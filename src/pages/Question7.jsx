@@ -52,39 +52,44 @@ function Question7() {
   }, []);
 
   return (
-    <div className="border-8 border-[#f58c81] rounded-3xl h-[800px] m-[20px] overflow-auto">
-      <h1 className="text-3xl text-[#791a0f] font-bold text-center pt-[30px]">
+    <div className="border-8 border-[#f58c81] rounded-3xl min-h-screen m-[10px] sm:m-[20px] p-4 sm:p-8 overflow-auto">
+      <h1 className="text-2xl sm:text-3xl text-[#791a0f] font-bold text-center pt-4">
         Q7.
-        <span className="flex justify-center">
+        <span className="block mt-2 text-lg sm:text-xl">
           What did you particularly like about these drinks?
         </span>
       </h1>
 
       {/* sample images with textboxes */}
-      <div className="flex justify-center gap-[100px] pt-[50px]">
+      <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-[100px] pt-8">
         {samples.map((sample, index) => (
-          <div key={index} className="flex flex-col items-center">
+          <div
+            key={index}
+            className="flex flex-col items-center bg-white/20 rounded-xl p-4 shadow-md"
+          >
             <img
               src={`/images/drink${index + 2}.png`}
               alt={sample}
-              className="h-[200px]"
+              className="h-[150px] sm:h-[200px] object-contain"
             />
-            <h1 className="text-[#791a0f] text-2xl mt-2">{sample}</h1>
+            <h1 className="text-[#791a0f] text-lg sm:text-2xl mt-2 font-semibold">
+              {sample}
+            </h1>
             <textarea
               placeholder={`Your response for ${sample}`}
               value={responses[sample]}
               onChange={(e) => handleChange(sample, e.target.value)}
-              className="mt-3 border-2 border-[#791a0f] rounded-lg p-2 w-[250px] h-[100px] resize-none"
+              className="mt-3 border-2 border-[#791a0f] rounded-lg p-2 w-[90%] sm:w-[250px] h-[100px] resize-none text-sm sm:text-base"
             />
           </div>
         ))}
       </div>
 
       {/* navigation buttons */}
-      <div className="flex justify-end gap-[30px] pt-[50px] pr-[40px]">
+      <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-4 sm:gap-[30px] pt-8 sm:pr-[40px]">
         <button
           onClick={handlePrevious}
-          className="bg-white p-5 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl cursor-pointer"
+          className="bg-white px-5 py-3 w-full sm:w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-base sm:text-lg rounded-xl cursor-pointer"
         >
           Back
         </button>
@@ -92,7 +97,7 @@ function Question7() {
         <button
           onClick={handleNext}
           disabled={!isComplete}
-          className={`p-5 w-[130px] text-lg rounded-xl cursor-pointer ${
+          className={`px-5 py-3 w-full sm:w-[130px] text-base sm:text-lg rounded-xl cursor-pointer ${
             isComplete
               ? "bg-[#791a0f] text-white"
               : "bg-gray-400 text-gray-200 cursor-not-allowed"

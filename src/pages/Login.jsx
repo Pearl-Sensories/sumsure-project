@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router";
 import React, { useState } from "react";
 
-
 function Login() {
-      const navigate = useNavigate();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,37 +20,44 @@ function Login() {
       setError("Invalid username or password");
     }
   };
+
   return (
-      <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center min-h-screen p-4">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 p-6 border rounded-lg shadow-md w-[300px]"
+        className="flex flex-col gap-4 p-6 border rounded-lg shadow-md w-full max-w-sm bg-white"
       >
-        <h1 className="text-2xl font-bold text-center text-[#791a0f]">Admin Login</h1>
+        <h1 className="text-2xl font-bold text-center text-[#791a0f]">
+          Admin Login
+        </h1>
+
         <input
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded w-full"
         />
+
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded w-full"
         />
+
         {error && <p className="text-red-600 text-sm">{error}</p>}
+
         <button
           type="submit"
-          className="bg-[#791a0f] text-white p-2 rounded hover:bg-[#f58c81]"
+          className="bg-[#791a0f] text-white p-2 rounded hover:bg-[#f58c81] transition-colors"
         >
           Login
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

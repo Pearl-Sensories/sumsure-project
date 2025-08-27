@@ -47,37 +47,39 @@ function Question5() {
   };
 
   return (
-    <div className="border-8 border-[#f58c81] rounded-3xl h-[800px] m-[20px] overflow-auto">
-      <h1 className="text-3xl text-[#791a0f] font-bold text-center pt-[30px]">
+    <div className="border-8 border-[#f58c81] rounded-3xl min-h-screen m-5 p-4 overflow-auto">
+      <h1 className="text-xl sm:text-2xl md:text-3xl text-[#791a0f] font-bold text-center pt-6">
         Q5.
-        <span className="flex justify-center text-center">
+        <span className="block mt-2 text-center">
           What's your overall liking of this drink? <br />
           Would you say that this drink is...?
         </span>
       </h1>
 
       {/* sample images */}
-      <div className="flex justify-center gap-[100px] pt-[50px]">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-12 pt-10">
         {samples.map((sample, i) => (
           <div key={i} className="flex flex-col items-center">
             <img
               src={`/images/drink${i + 2}.png`}
               alt={sample}
-              className="h-[200px]"
+              className="h-32 sm:h-40 md:h-52 object-contain"
             />
-            <h1 className="text-[#791a0f] text-2xl mt-2">{sample}</h1>
+            <h1 className="text-[#791a0f] text-lg sm:text-xl md:text-2xl mt-2 text-center">
+              {sample}
+            </h1>
           </div>
         ))}
       </div>
 
       {/* options table */}
-      <div className="pt-[40px] px-[40px]">
-        <table className="w-full text-[#791a0f] text-xl border-collapse">
+      <div className="pt-8 overflow-x-auto">
+        <table className="w-full min-w-[600px] text-[#791a0f] text-sm sm:text-base md:text-lg border-collapse">
           <thead>
             <tr>
               <th className="text-left p-2 font-bold">Sample</th>
               {options.map((option, i) => (
-                <th key={i} className="p-2 text-xl font-bold">
+                <th key={i} className="p-2 font-bold whitespace-nowrap">
                   {option}
                 </th>
               ))}
@@ -95,7 +97,7 @@ function Question5() {
                       value={option}
                       checked={answers[sample] === option}
                       onChange={() => handleChange(sample, option)}
-                      className="w-5 h-5 accent-[#791a0f]"
+                      className="w-4 h-4 accent-[#791a0f]"
                     />
                   </td>
                 ))}
@@ -106,10 +108,10 @@ function Question5() {
       </div>
 
       {/* navigation buttons */}
-      <span className="flex gap-[30px]">
+      <div className="flex justify-between items-center flex-wrap gap-4 mt-8">
         <button
           onClick={handlePrevious}
-          className="bg-white p-5 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl ml-[90rem] mt-[50px] cursor-pointer"
+          className="bg-white px-6 py-3 border-2 border-[#791a0f] text-[#791a0f] text-base sm:text-lg rounded-xl cursor-pointer"
         >
           Back
         </button>
@@ -117,7 +119,7 @@ function Question5() {
         <button
           onClick={handleNext}
           disabled={!allAnswered}
-          className={`p-5 w-[130px] text-lg rounded-xl mt-[50px] cursor-pointer ${
+          className={`px-6 py-3 text-base sm:text-lg rounded-xl cursor-pointer ${
             allAnswered
               ? "bg-[#791a0f] text-white"
               : "bg-gray-400 text-white cursor-not-allowed"
@@ -125,7 +127,7 @@ function Question5() {
         >
           Next
         </button>
-      </span>
+      </div>
     </div>
   );
 }

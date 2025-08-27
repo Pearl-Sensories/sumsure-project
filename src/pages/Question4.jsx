@@ -14,7 +14,7 @@ function Question4() {
 
   const samples = ["Sample A", "Sample B", "Sample C"];
 
-  // Load existing answers for Q4 if available (Option 1 style)
+  // Load existing answers for Q4 if available
   const [answers, setAnswers] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("responses_user1") || "{}");
     return saved.q4 || {};
@@ -27,11 +27,9 @@ function Question4() {
   const allAnswered = samples.every((sample) => answers[sample]);
 
   const handleNext = () => {
-    // Save Q4 answers to localStorage (Option 1 style)
     const saved = JSON.parse(localStorage.getItem("responses_user1") || "{}");
     saved.q4 = answers;
     localStorage.setItem("responses_user1", JSON.stringify(saved));
-
     navigate("/question5");
   };
 
@@ -40,37 +38,37 @@ function Question4() {
   };
 
   return (
-    <div className="border-8 border-[#f58c81] rounded-3xl h-[800px] m-[20px] overflow-auto">
-      <h1 className="text-3xl text-[#791a0f] font-bold text-center pt-[30px]">
+    <div className="border-8 border-[#f58c81] rounded-3xl min-h-screen m-[20px] overflow-auto">
+      <h1 className="text-2xl sm:text-3xl text-[#791a0f] font-bold text-center pt-[30px] px-4">
         Q4.
-        <span className="flex justify-center">
+        <span className="block mt-2">
           What do you think of the mouthfeel thickness of this drink? <br />
           Would you say the texture of this drink is...?
         </span>
       </h1>
 
       {/* sample images */}
-      <div className="flex justify-center gap-[100px] pt-[50px]">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-10 sm:gap-[100px] pt-[50px]">
         {samples.map((sample, i) => (
           <div key={i} className="flex flex-col items-center">
             <img
               src={`/images/drink${i + 2}.png`}
               alt={sample}
-              className="h-[200px]"
+              className="h-[150px] sm:h-[200px] object-contain"
             />
-            <h1 className="text-[#791a0f] text-2xl mt-2">{sample}</h1>
+            <h1 className="text-[#791a0f] text-lg sm:text-2xl mt-2">{sample}</h1>
           </div>
         ))}
       </div>
 
       {/* options table */}
-      <div className="pt-[40px] px-[40px]">
-        <table className="w-full text-[#791a0f] text-xl border-collapse">
+      <div className="pt-[40px] px-2 sm:px-[40px] overflow-x-auto">
+        <table className="w-full min-w-[600px] text-[#791a0f] text-sm sm:text-lg border-collapse">
           <thead>
             <tr>
               <th className="text-left p-2 font-bold">Sample</th>
               {options.map((option, i) => (
-                <th key={i} className="p-2 text-lg font-bold">
+                <th key={i} className="p-2 font-bold text-left sm:text-center">
                   {option}
                 </th>
               ))}
@@ -88,7 +86,7 @@ function Question4() {
                       value={option}
                       checked={answers[sample] === option}
                       onChange={() => handleChange(sample, option)}
-                      className="w-5 h-5 accent-[#791a0f]"
+                      className="w-4 h-4 sm:w-5 sm:h-5 accent-[#791a0f]"
                     />
                   </td>
                 ))}
@@ -99,10 +97,10 @@ function Question4() {
       </div>
 
       {/* navigation buttons */}
-      <span className="flex gap-[30px]">
+      <div className="flex justify-between flex-wrap gap-4 px-4 sm:px-[40px] mt-[50px]">
         <button
           onClick={handlePrevious}
-          className="bg-white p-5 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl ml-[90rem] mt-[50px] cursor-pointer"
+          className="bg-white p-3 sm:p-5 w-[100px] sm:w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-base sm:text-lg rounded-xl cursor-pointer"
         >
           Back
         </button>
@@ -110,13 +108,13 @@ function Question4() {
         <button
           onClick={handleNext}
           disabled={!allAnswered}
-          className={`p-5 w-[130px] text-white text-lg rounded-xl mt-[50px] cursor-pointer ${
+          className={`p-3 sm:p-5 w-[100px] sm:w-[130px] text-white text-base sm:text-lg rounded-xl cursor-pointer ${
             allAnswered ? "bg-[#791a0f]" : "bg-gray-400 cursor-not-allowed"
           }`}
         >
           Next
         </button>
-      </span>
+      </div>
     </div>
   );
 }

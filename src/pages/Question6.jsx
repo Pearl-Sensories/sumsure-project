@@ -32,52 +32,54 @@ function Question6() {
       return;
     }
 
-    // Save Q6 answers to localStorage (Option 1)
+    // Save Q6 answers to localStorage
     const saved = JSON.parse(localStorage.getItem("responses_user1") || "{}");
     localStorage.setItem(
       "responses_user1",
       JSON.stringify({ ...saved, q6: answers })
     );
 
-    navigate("/question7"); // Navigate to next question
+    navigate("/question7");
   };
 
   const handlePrevious = () => {
-    navigate("/question5"); // Navigate to previous question
+    navigate("/question5");
   };
 
   return (
-    <div className="border-8 border-[#f58c81] rounded-3xl h-[800px] m-[20px] overflow-auto">
-      <h1 className="text-3xl text-[#791a0f] font-bold text-center pt-[30px]">
+    <div className="border-8 border-[#f58c81] rounded-3xl min-h-screen m-4 p-4 overflow-auto">
+      <h1 className="text-2xl md:text-3xl text-[#791a0f] font-bold text-center pt-6 px-2">
         Q6.
-        <span className="flex justify-center">
-          If this drink is to be available in the market, <br />
+        <span className="block mt-2 text-base md:text-lg">
+          If this drink is to be available in the market, <br className="hidden md:block" />
           how likely would you accept and buy it?
         </span>
       </h1>
 
       {/* sample images */}
-      <div className="flex justify-center gap-[100px] pt-[50px]">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20 pt-10">
         {samples.map((sample, i) => (
           <div key={i} className="flex flex-col items-center">
             <img
               src={`/images/drink${i + 2}.png`}
               alt={sample}
-              className="h-[200px]"
+              className="h-40 md:h-52 object-contain"
             />
-            <h1 className="text-[#791a0f] text-2xl mt-2">{sample}</h1>
+            <h1 className="text-[#791a0f] text-lg md:text-2xl mt-2">{sample}</h1>
           </div>
         ))}
       </div>
 
       {/* options table */}
-      <div className="pt-[40px] px-[40px]">
-        <table className="w-full text-[#791a0f] text-xl border-collapse">
+      <div className="pt-8 px-2 md:px-10 overflow-x-auto">
+        <table className="w-full text-[#791a0f] text-sm md:text-lg border-collapse min-w-max">
           <thead>
             <tr>
               <th className="text-left p-2 font-bold">Sample</th>
               {options.map((option, i) => (
-                <th key={i} className="p-2 text-lg font-bold">{option}</th>
+                <th key={i} className="p-2 font-bold text-left whitespace-nowrap">
+                  {option}
+                </th>
               ))}
             </tr>
           </thead>
@@ -93,7 +95,7 @@ function Question6() {
                       value={option}
                       checked={answers[sample] === option}
                       onChange={() => handleChange(sample, option)}
-                      className="w-5 h-5 accent-[#791a0f]"
+                      className="w-4 h-4 md:w-5 md:h-5 accent-[#791a0f]"
                     />
                   </td>
                 ))}
@@ -104,10 +106,10 @@ function Question6() {
       </div>
 
       {/* navigation buttons */}
-      <span className="flex gap-[30px]">
+      <div className="flex flex-col md:flex-row justify-center md:justify-end gap-6 mt-10 px-4">
         <button
           onClick={handlePrevious}
-          className="bg-white p-5 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl ml-[90rem] mt-[50px] cursor-pointer"
+          className="bg-white py-3 px-6 border-2 border-[#791a0f] text-[#791a0f] text-base md:text-lg rounded-xl cursor-pointer"
         >
           Back
         </button>
@@ -115,13 +117,15 @@ function Question6() {
         <button
           onClick={handleNext}
           disabled={!allAnswered}
-          className={`p-5 w-[130px] text-lg rounded-xl mt-[50px] cursor-pointer ${
-            !allAnswered ? "bg-gray-400 text-white cursor-not-allowed" : "bg-[#791a0f] text-white"
+          className={`py-3 px-6 text-base md:text-lg rounded-xl cursor-pointer ${
+            !allAnswered
+              ? "bg-gray-400 text-white cursor-not-allowed"
+              : "bg-[#791a0f] text-white"
           }`}
         >
           Next
         </button>
-      </span>
+      </div>
     </div>
   );
 }

@@ -6,7 +6,6 @@ function Question8() {
 
   const samples = ["Sample A", "Sample B", "Sample C"];
 
-  // local state for text inputs
   const [responses, setResponses] = useState({
     "Sample A": "",
     "Sample B": "",
@@ -17,23 +16,14 @@ function Question8() {
     setResponses((prev) => ({ ...prev, [sample]: value }));
   };
 
-  // check if all fields are filled
   const isComplete = Object.values(responses).every((val) => val.trim() !== "");
 
-  // Save into central surveyResponses
   const handleNext = () => {
     if (!isComplete) return;
-
-    // read existing responses
     const allResponses =
       JSON.parse(localStorage.getItem("surveyResponses")) || {};
-
-    // add/update current question
     allResponses.question8 = responses;
-
-    // save back
     localStorage.setItem("surveyResponses", JSON.stringify(allResponses));
-
     navigate("/question9");
   };
 
@@ -41,7 +31,6 @@ function Question8() {
     navigate("/question7");
   };
 
-  // load saved responses if user comes back
   useEffect(() => {
     const allResponses =
       JSON.parse(localStorage.getItem("surveyResponses")) || {};
@@ -51,39 +40,39 @@ function Question8() {
   }, []);
 
   return (
-    <div className="border-8 border-[#f58c81] rounded-3xl h-[800px] m-[20px] overflow-auto">
-      <h1 className="text-3xl text-[#791a0f] font-bold text-center pt-[30px]">
+    <div className="border-8 border-[#f58c81] rounded-3xl min-h-screen m-[20px] overflow-auto">
+      <h1 className="text-3xl text-[#791a0f] font-bold text-center pt-[30px] px-4">
         Q8.
-        <span className="flex justify-center">
+        <span className="block mt-2">
           What if anything, did you particularly dislike about these drinks?
         </span>
       </h1>
 
       {/* sample images with textboxes */}
-      <div className="flex justify-center gap-[100px] pt-[50px]">
+      <div className="flex flex-wrap justify-center gap-10 pt-[50px] px-4">
         {samples.map((sample, index) => (
-          <div key={index} className="flex flex-col items-center">
+          <div key={index} className="flex flex-col items-center w-full sm:w-[250px]">
             <img
               src={`/images/drink${index + 2}.png`}
               alt={sample}
-              className="h-[200px]"
+              className="h-[150px] sm:h-[200px] object-contain"
             />
-            <h1 className="text-[#791a0f] text-2xl mt-2">{sample}</h1>
+            <h1 className="text-[#791a0f] text-xl sm:text-2xl mt-2">{sample}</h1>
             <textarea
               placeholder={`Your response for ${sample}`}
               value={responses[sample]}
               onChange={(e) => handleChange(sample, e.target.value)}
-              className="mt-3 border-2 border-[#791a0f] rounded-lg p-2 w-[250px] h-[100px] resize-none"
+              className="mt-3 border-2 border-[#791a0f] rounded-lg p-2 w-full sm:w-[250px] h-[100px] resize-none"
             />
           </div>
         ))}
       </div>
 
       {/* navigation buttons */}
-      <div className="flex justify-end gap-[30px] pt-[50px] pr-[40px]">
+      <div className="flex flex-col sm:flex-row justify-end items-center gap-5 pt-[50px] pr-[40px]">
         <button
           onClick={handlePrevious}
-          className="bg-white p-5 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl cursor-pointer"
+          className="bg-white px-6 py-3 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl cursor-pointer"
         >
           Back
         </button>
@@ -91,7 +80,7 @@ function Question8() {
         <button
           onClick={handleNext}
           disabled={!isComplete}
-          className={`p-5 w-[130px] text-lg rounded-xl cursor-pointer ${
+          className={`px-6 py-3 w-[130px] text-lg rounded-xl cursor-pointer ${
             isComplete
               ? "bg-[#791a0f] text-white"
               : "bg-gray-400 text-gray-200 cursor-not-allowed"

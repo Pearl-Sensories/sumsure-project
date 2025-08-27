@@ -49,7 +49,7 @@ function Question9() {
 
     const currentResponse = { selectedSamples, responses };
 
-    // ✅ Save/update inside surveyResponses (Option 1)
+    // ✅ Save/update inside surveyResponses
     const allResponses =
       JSON.parse(localStorage.getItem("surveyResponses")) || {};
     allResponses.question9 = currentResponse;
@@ -81,13 +81,30 @@ function Question9() {
           Which of the two samples do you prefer? Please tick below?
         </span>
       </h1>
-       
-       <Link to="/login">
-      <h1 className="flex justify-end text-2xl text-[#791a0f] font-bold -mt-[70px] pr-[20px]">Log In <br />as an admin?</h1>
-      </Link>
+
+      {/* Log In link responsive */}
+      <div className="w-full">
+        {/* Desktop & tablet (top-right) */}
+        <Link
+          to="/login"
+          className="hidden md:flex justify-end text-2xl text-[#791a0f] font-bold -mt-[70px] pr-[20px]"
+        >
+          Log In <br />as an admin?
+        </Link>
+
+        {/* Mobile (bottom) */}
+        {submitted && (
+          <Link
+            to="/login"
+            className="flex md:hidden justify-center text-lg text-[#791a0f] font-bold mt-5"
+          >
+            Log In as an admin?
+          </Link>
+        )}
+      </div>
 
       {/* sample images with checkboxes */}
-      <div className="flex justify-center gap-[100px] pt-[50px]">
+      <div className="flex justify-center gap-[100px] pt-[50px] flex-wrap">
         {samples.map((sample, index) => (
           <div key={index} className="flex flex-col items-center">
             <img
@@ -118,7 +135,7 @@ function Question9() {
       {selectedSamples.length > 0 && (
         <div className="flex flex-col items-center pt-[30px]">
           <h1 className="text-2xl text-[#791a0f] mb-2">Why?</h1>
-          <div className="flex gap-[50px]">
+          <div className="flex gap-[50px] flex-wrap justify-center">
             {selectedSamples.map((sample) => (
               <textarea
                 key={sample}
@@ -134,7 +151,7 @@ function Question9() {
 
       {/* navigation & submit */}
       <div className="flex flex-col items-center gap-[20px] pt-[50px] pr-[40px]">
-        <div className="flex gap-[30px]">
+        <div className="flex gap-[30px] flex-wrap justify-center">
           <button
             onClick={handlePrevious}
             className="bg-white p-5 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl cursor-pointer"
@@ -157,10 +174,18 @@ function Question9() {
 
         {/* success message */}
         {submitted && (
-          <p className="text-green-600 text-xl mt-5 font-semibold">
+          <p className="text-green-600 text-xl mt-5 font-semibold text-center">
             Responses submitted successfully🥳!
           </p>
         )}
+
+        {/* Mobile "Log In as admin" link below buttons */}
+        <Link
+          to="/login"
+          className="flex md:hidden justify-center text-lg text-[#791a0f] font-bold mt-5"
+        >
+          Log In as an admin?
+        </Link>
       </div>
     </div>
   );
