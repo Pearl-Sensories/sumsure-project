@@ -13,7 +13,7 @@ function Home() {
   };
 
   return (
-    <div className="bg-[#f58c81] rounded-3xl min-h-screen m-5 flex flex-col items-center justify-center">
+    <div className="bg-[#f58c81] rounded-none sm:rounded-3xl min-h-screen m-0 sm:m-5 flex flex-col items-center justify-center">
       {/* Title */}
       <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold text-white font-mono text-center px-4">
         Questionnaire!
