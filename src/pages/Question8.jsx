@@ -70,12 +70,13 @@ function Question8() {
 
       {/* navigation buttons */}
       <div className="flex flex-col sm:flex-row justify-end items-center gap-5 pt-[50px] pr-[40px]">
+        <Link to="/question7">
         <button
-          onClick={handlePrevious}
           className="bg-white px-6 py-3 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl cursor-pointer"
         >
           Back
         </button>
+        </Link>
 
         <button
           onClick={handleNext}

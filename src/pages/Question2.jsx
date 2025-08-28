@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function Question2() {
   const navigate = useNavigate();
@@ -110,12 +110,13 @@ function Question2() {
 
       {/* navigation buttons */}
       <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-4 sm:gap-[30px] px-6 mt-[50px]">
+        <Link to="/question1">
         <button
-          onClick={handlePrevious}
           className="bg-white p-3 md:p-5 w-full sm:w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl cursor-pointer"
         >
           Back
         </button>
+        </Link>
 
         <button
           onClick={handleNext}

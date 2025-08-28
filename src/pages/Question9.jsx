@@ -56,9 +56,6 @@ function Question9() {
     navigate("/success");
   };
 
-  const handlePrevious = () => {
-    navigate("/question8");
-  };
 
   // ✅ Load saved responses if user comes back
   useEffect(() => {
@@ -139,12 +136,13 @@ function Question9() {
       {/* navigation & submit */}
       <div className="flex flex-col items-center gap-[20px] pt-[50px] pr-[40px]">
         <div className="flex gap-[30px] flex-wrap justify-center">
+          <Link to="/question8">
           <button
-            onClick={handlePrevious}
             className="bg-white p-5 w-[130px] border-2 border-[#791a0f] text-[#791a0f] text-lg rounded-xl cursor-pointer"
           >
             Back
           </button>
+          </Link>
 
           <button
             onClick={handleSubmit}
