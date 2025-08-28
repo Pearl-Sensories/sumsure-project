@@ -12,9 +12,6 @@ function Question9() {
   // State for the textboxes (responses linked to selected samples)
   const [responses, setResponses] = useState({});
 
-  // State to show success message
-  const [submitted, setSubmitted] = useState(false);
-
   const handleCheckboxChange = (sample) => {
     if (selectedSamples.includes(sample)) {
       // Remove
@@ -55,8 +52,8 @@ function Question9() {
     allResponses.question9 = currentResponse;
     localStorage.setItem("surveyResponses", JSON.stringify(allResponses));
 
-    // Show success message
-    setSubmitted(true);
+    // ✅ Navigate to success page
+    navigate("/success");
   };
 
   const handlePrevious = () => {
@@ -91,16 +88,6 @@ function Question9() {
         >
           Log In <br />as an admin?
         </Link>
-
-        {/* Mobile (bottom) */}
-        {submitted && (
-          <Link
-            to="/login"
-            className="flex md:hidden justify-center text-lg text-[#791a0f] font-bold mt-5"
-          >
-            Log In as an admin?
-          </Link>
-        )}
       </div>
 
       {/* sample images with checkboxes */}
@@ -161,9 +148,9 @@ function Question9() {
 
           <button
             onClick={handleSubmit}
-            disabled={!isComplete || submitted}
+            disabled={!isComplete}
             className={`p-5 w-[130px] text-lg rounded-xl cursor-pointer ${
-              isComplete && !submitted
+              isComplete
                 ? "bg-[#791a0f] text-white"
                 : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}
@@ -171,21 +158,6 @@ function Question9() {
             Submit
           </button>
         </div>
-
-        {/* success message */}
-        {submitted && (
-          <p className="text-green-600 text-xl mt-5 font-semibold text-center">
-            Responses submitted successfully🥳!
-          </p>
-        )}
-
-        {/* Mobile "Log In as admin" link below buttons */}
-        <Link
-          to="/login"
-          className="flex md:hidden justify-center text-lg text-[#791a0f] font-bold mt-5"
-        >
-          Log In as an admin?
-        </Link>
       </div>
     </div>
   );

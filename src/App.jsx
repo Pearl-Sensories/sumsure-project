@@ -11,6 +11,7 @@ import Question8 from './pages/Question8.jsx'
 import Question9 from './pages/Question9.jsx'
 import Admin from './pages/Admin.jsx'
 import Login from './pages/Login.jsx'
+import SuccessMessage from './pages/SuccessMessage.jsx'
 
 function App() {
  
@@ -32,6 +33,7 @@ function App() {
        <Route path='/question9' element={<Question9/>}/>
        <Route path='/admin' element={<Admin/>}/>
        <Route path='/login' element={<Login/>}/>
+        <Route path='/success' element={<SuccessMessage/>}/>
       </Route>
     </Routes>
    </BrowserRouter>
