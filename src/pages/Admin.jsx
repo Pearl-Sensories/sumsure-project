@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export default function AdminDashboard() {
   const [responses, setResponses] = useState([]);
@@ -125,11 +127,53 @@ export default function AdminDashboard() {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Survey Responses");
 
-    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
     const blob = new Blob([excelBuffer], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
     saveAs(blob, "survey_responses.xlsx");
+  };
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+
+    // Title
+    doc.setFontSize(16);
+    doc.text("Survey Responses", 14, 20);
+
+    // Headers
+    const headers = [
+      ["User ID", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9"],
+    ];
+
+    // Rows
+    const data = responses.map((resp) => [
+      resp.userId,
+      formatField(resp.question1 || resp.q1),
+      formatField(resp.question2 || resp.q2),
+      formatField(resp.question3 || resp.q3),
+      formatField(resp.question4 || resp.q4),
+      formatField(resp.question5 || resp.q5),
+      formatField(resp.question6 || resp.q6),
+      formatField(resp.question7 || resp.q7),
+      formatField(resp.question8 || resp.q8),
+      formatField(resp.question9 || resp.q9),
+    ]);
+
+    // Table
+    autoTable(doc, {
+      head: headers,
+      body: data,
+      startY: 30,
+      styles: { fontSize: 8, cellWidth: "wrap" },
+      headStyles: { fillColor: [121, 26, 15] },
+      alternateRowStyles: { fillColor: [245, 140, 129, 0.2] },
+    });
+
+    doc.save("survey_responses.pdf");
   };
 
   return (
@@ -144,6 +188,13 @@ export default function AdminDashboard() {
           className="bg-[#791a0f] text-white px-4 py-2 rounded cursor-pointer hover:bg-[#f58c81] transition"
         >
           Export Excel
+        </button>
+
+        <button
+          onClick={exportToPDF}
+          className="bg-[#791a0f] text-white px-4 py-2 rounded cursor-pointer hover:bg-[#f58c81] transition"
+        >
+          Download Pdf
         </button>
       </div>
 
@@ -170,15 +221,33 @@ export default function AdminDashboard() {
               {responses.map((resp, i) => (
                 <tr key={i} className="text-center">
                   <td className="border p-2">{resp.userId}</td>
-                  <td className="border p-2">{formatField(resp.question1 || resp.q1)}</td>
-                  <td className="border p-2">{formatField(resp.question2 || resp.q2)}</td>
-                  <td className="border p-2">{formatField(resp.question3 || resp.q3)}</td>
-                  <td className="border p-2">{formatField(resp.question4 || resp.q4)}</td>
-                  <td className="border p-2">{formatField(resp.question5 || resp.q5)}</td>
-                  <td className="border p-2">{formatField(resp.question6 || resp.q6)}</td>
-                  <td className="border p-2">{formatField(resp.question7 || resp.q7)}</td>
-                  <td className="border p-2">{formatField(resp.question8 || resp.q8)}</td>
-                  <td className="border p-2">{formatField(resp.question9 || resp.q9)}</td>
+                  <td className="border p-2">
+                    {formatField(resp.question1 || resp.q1)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question2 || resp.q2)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question3 || resp.q3)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question4 || resp.q4)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question5 || resp.q5)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question6 || resp.q6)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question7 || resp.q7)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question8 || resp.q8)}
+                  </td>
+                  <td className="border p-2">
+                    {formatField(resp.question9 || resp.q9)}
+                  </td>
                 </tr>
               ))}
             </tbody>
