@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function Question5() {
   const navigate = useNavigate();
@@ -42,9 +42,6 @@ function Question5() {
     navigate("/question6"); // Navigate to next question
   };
 
-  const handlePrevious = () => {
-    navigate("/question4");
-  };
 
   return (
     <div className="border-8 border-[#f58c81] rounded-3xl min-h-screen m-5 p-4 overflow-auto">

@@ -33,9 +33,6 @@ function Question4() {
     navigate("/question5");
   };
 
-  const handlePrevious = () => {
-    navigate("/question3");
-  };
 
   return (
     <div className="border-8 border-[#f58c81] rounded-3xl min-h-screen m-[20px] overflow-auto">

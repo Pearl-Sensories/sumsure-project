@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import {Link, useNavigate } from "react-router";
 import React, { useState, useEffect } from "react";
 
 function Question7() {
