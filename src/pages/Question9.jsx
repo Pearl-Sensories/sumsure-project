@@ -76,17 +76,6 @@ function Question9() {
         </span>
       </h1>
 
-      {/* Log In link responsive */}
-      <div className="w-full">
-        {/* Desktop & tablet (top-right) */}
-        <Link
-          to="/login"
-          className="hidden md:flex justify-end text-2xl text-[#791a0f] font-bold -mt-[70px] pr-[20px]"
-        >
-          Log In <br />as an admin?
-        </Link>
-      </div>
-
       {/* sample images with checkboxes */}
       <div className="flex justify-center gap-[100px] pt-[50px] flex-wrap">
         {samples.map((sample, index) => (
