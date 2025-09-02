@@ -1,6 +1,7 @@
 import { FaArrowUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 function Home() {
   const navigate = useNavigate();
@@ -36,6 +37,14 @@ function Home() {
       <h1 className="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl flex items-center justify-center mt-6">
         Tap to start <FaArrowUp className="ml-2" />
       </h1>
+      <h1 className="text-white text-sm sm:text-md md:text-xl lg:text-2xl mt-5">OR</h1>
+       {/* Admin login link */}
+            <Link
+              to="/login"
+              className="text-lg sm:text-xl md:text-2xl text-white font-bold mt-6 underline hover:text-gray-200 transition"
+            >
+              Log In as an admin?
+            </Link>
     </div>
   );
 }
